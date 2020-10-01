@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h3>Hi {{ user.username }}!</h3>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+  {% block content_header %}
+    <h2>Files</h2>
+    <p>
+      <a href="{% url 'upload-file' %}" class="btn btn-primary">Upload book</a>
+    </p>
+  {% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Download</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for file in files %}
+        <tr>
+          <td>
+              <span class="text-muted">No cover</span>
+          </td>
+          <td>{{ File.title }}</td>
+          <td>{{ File.about }}</td>
+          <td>
+            <a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank">
+              Save to my device 
+            </a>
+          </td>
+          <td>
+            <form method="post" action="{% url 'delete-file' file.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>You are not logged in. <a href="{% url 'login' %}">Login</a> here.</p>
+  <p>New User? <a href="{% url 'signup' %}">Sign Up</a> here.</p>
+  {% endif %}
+  
+{% endblock %}
