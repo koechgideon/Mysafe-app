@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-class File(models.Model):
+class myfile(models.Model):
     file=models.FileField(upload_to='files/encrypted')
     password=models.CharField(max_length=10,blank=True,null=True,default=None)
     title=models.CharField(max_length=100)
