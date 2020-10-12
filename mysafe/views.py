@@ -10,7 +10,7 @@ from django.core.files import File
 
 
 
-
+@login_required
 def home(request):
     return render(request, 'mysafe/home.html')
 
