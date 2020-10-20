@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+import os
 
 class myfile(models.Model):
     file=models.FileField(upload_to='files/encrypted')
@@ -16,6 +17,9 @@ class myfile(models.Model):
     def get_absolute_url(self):
         return reverse("files-posted", kwargs={"pk": self.pk})
     
+    def save(self, *args, **kwargs):
+        self.file.name = os.path.basename(self.file.name)
+        return super(myfile, self).save(*args, **kwargs)
     
 
 
