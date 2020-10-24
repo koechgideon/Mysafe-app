@@ -16,18 +16,18 @@
       <tr>
         <th>File Name</th>
         <th>Date of upload</th>
-        <th>      </th>
-        <th>      </th>
+        <th>Download</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       {% for file in files %}
         <tr>
-          <td>{{ file.file.name }}</td>
+          <td>{{ file.decryptedFile.name }}</td>
           <td>
           <span class="text-muted">{{ file.date_posted }}</span>
           </td>
-          <td><a href="{{ file.file.url }}" class="btn btn-primary btn-sm" target="_blank">Download</a></td>
+          <td><a href="{{ file.decryptedFile.url }}" class="btn btn-primary btn-sm" target="_blank">stream back</a></td>
           <td>
             <form method="post" action="{% url 'delete-file' file.pk %}">
               {% csrf_token %}

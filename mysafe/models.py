@@ -7,19 +7,28 @@ import os
 class myfile(models.Model):
     file=models.FileField(upload_to='files/encrypted')
     password=models.CharField(max_length=10,blank=True,null=True,default=None)
-    title=models.CharField(max_length=100)
-    about=models.CharField(max_length=100)
     date_posted=models.DateTimeField(default=timezone.now)
     objects=models.Manager() 
     
     def __str__(self):
-        return self.title
+        return str(self.file)
     def get_absolute_url(self):
-        return reverse("files-posted", kwargs={"pk": self.pk})
+        return reverse("landing-page", kwargs={"pk": self.pk})
+
+class Dfile(models.Model):
+    decryptedFile=models.FileField(upload_to='files/decrypted')
+    password=models.CharField(max_length=10,blank=True,null=True,default=None)
+    date_posted=models.DateTimeField(default=timezone.now)
+    objects=models.Manager() 
     
-    def save(self, *args, **kwargs):
+    def __str__(self):
+        return str(self.decryptedFile)
+    def get_absolute_url(self):
+        return reverse("landing-page", kwargs={"pk": self.pk})
+
+    '''def save(self, *args, **kwargs):
         self.file.name = os.path.basename(self.file.name)
-        return super(myfile, self).save(*args, **kwargs)
+        return super(myfile, self).save(*args, **kwargs)'''
     
 
 

@@ -51,6 +51,9 @@ h6 {
     .sidenav a {
         font-size: 18px;
     }
+    .content-section {
+        padding-top: 15px;
+    }
 }
 
 ul {
@@ -75,6 +78,7 @@ ul {
 
 .content-section {
     background: bisque;
+    position: fixed;
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
