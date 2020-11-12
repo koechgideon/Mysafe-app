@@ -1,1 +1,1 @@
-#About this application
+About this application
